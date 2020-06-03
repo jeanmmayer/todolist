@@ -1,0 +1,17 @@
+
+<li
+    class="list-group-item"
+    [class.list-group-item-success]="task.status == 1"
+    [class.list-group-item-warning]="task.status == 0"
+>
+    <button type="button" class="btn btn-danger">
+        <i class="material-icons md-dark">
+            {{ completed_icon }}
+        </i>
+    </button>
+
+    {{ task.name }}
+
+    <app-task-buttons [id]="task.id"></app-task-buttons>
+
+</li>

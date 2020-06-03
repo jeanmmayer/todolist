@@ -1,0 +1,8 @@
+header {
+    background-color: white;
+    text-align: center;
+}
+
+header.jumbotron {
+    padding: 1rem !important;
+}

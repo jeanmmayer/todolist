@@ -1,0 +1,11 @@
+<div *ngFor="let item of list; let idx = index" class="container-fluid">
+  	<a class="btn btn-primary" data-toggle="collapse" href="#collapse{{ idx }}" role="button" aria-expanded="true">
+		{{ item.name }}
+	</a>
+
+	<div class="collapse hide" id="collapse{{ idx }}">
+		<ul class="list-group">
+			<app-tasks *ngFor="let t of item.tasks" [task]="t"></app-tasks>
+		</ul>
+	</div>
+</div>
