@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
-    background-color: #F6F8F9;
+    /* Smallest resolution supported */
+    min-width: 300px;
+}
+
+.btn:focus,
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.list-group-item-action:active {
+    background-color: inherit !important;
 }

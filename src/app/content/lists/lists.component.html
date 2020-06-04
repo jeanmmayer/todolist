@@ -1,11 +1,30 @@
-<div *ngFor="let item of list; let idx = index" class="container-fluid">
-  	<a class="btn btn-primary" data-toggle="collapse" href="#collapse{{ idx }}" role="button" aria-expanded="true">
-		{{ item.name }}
+<h4 class="d-flex align-items-center">
+	<div class="flex-grow-1">
+		Listas de Tarefas
+	</div>
+	<div class="d-flex align-items-center pointer">
+		<button class="btn btn-primary" title="Criar lista">
+			<i class="material-icons md-dark text-light add-circle">add_circle list</i>
+		</button>
+	</div>
+</h4>
+
+<div *ngFor="let l of list; let idx = index">
+	<a
+		class="text-dark btn pointer bg-white text-left p-4 shadow-sm d-flex mt-2 border"
+		data-toggle="collapse"
+		href="#collapse{{ idx }}"
+		role="button"
+		aria-expanded="true"
+	>
+		<i class="material-icons md-dark text-primary">list</i>
+		{{ l.name }}
 	</a>
 
-	<div class="collapse hide" id="collapse{{ idx }}">
+	<div class="collapse show shadow-sm" id="collapse{{ idx }}">
 		<ul class="list-group">
-			<app-tasks *ngFor="let t of item.tasks" [task]="t"></app-tasks>
+			<app-tasks *ngFor="let t of l.tasks" [task]="t"></app-tasks>
+			<app-new-task [id_list]="l.id"></app-new-task>
 		</ul>
 	</div>
 </div>

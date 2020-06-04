@@ -1,0 +1,35 @@
+<li
+    class="
+        list-group-item
+        list-group-item-action
+        d-flex
+        flex-wrap
+        align-items-center
+        justify-content-between
+        p-1
+        p-sm-2
+        p-md-3
+    "
+>
+    <div class="d-flex align-items-center flex-grow-1">
+        <button type="button" class="btn border-0">
+            <i class="material-icons md-dark disabled">
+                check_box_outline_blank
+            </i>
+        </button>
+        <div class="w-100">
+            <input
+                type="text"
+                [(ngModel)]="taskText"
+                class="form-control w-100 border-0 bg-transparent"
+                placeholder="Digite aqui..."
+            >
+        </div>
+    </div>
+    <button
+        class="btn m-auto btn-primary"
+        [disabled]="!taskText.length"
+    >
+        Salvar Tarefa
+    </button>
+</li>

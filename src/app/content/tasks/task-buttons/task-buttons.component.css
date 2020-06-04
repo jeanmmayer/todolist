@@ -1,0 +1,8 @@
+.dropdown-item:active {
+    background: inherit !important;
+    color: inherit !important;
+}
+
+.material-icons {
+    margin-right: 10px;
+}

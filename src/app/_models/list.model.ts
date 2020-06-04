@@ -1,4 +1,4 @@
-import { Task } from '../tasks/task.model';
+import { Task } from './task.model';
 
 export interface List {
 	id: number,
