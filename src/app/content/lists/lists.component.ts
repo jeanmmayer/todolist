@@ -1,63 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { List } from '../../_models/list.model';
+import { Component, OnInit  } from '@angular/core';
+import { List } from 'src/app/_models/list.model';
+import { ListService } from 'src/app/_services';
+import { TaskService } from 'src/app/_services';
+import { AuthenticationService } from 'src/app/_services';
 
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
   styleUrls: ['./lists.component.css']
 })
-export class ListsComponent implements OnInit {
+export class ListsComponent {
 
-  list: List[];
+	list: List[];
 
-  constructor() {
-    this.list = [
-      {
-        "id" : 1,
-        "name" : "Lista 1",
-        "tasks" : [
-          {
-            "id": 1,
-            "name": "Abrir caderno",
-            "active": true
-          },
-          {
-            "id": 2,
-            "name": "Fazer tarefa",
-            "active": false
-          },
-          {
-            "id": 3,
-            "name": "Fechar caderno",
-            "active": false
-          },
-        ]
-      },
-      {
-        "id" : 2,
-        "name" : "Lista 2",
-        "tasks" : [
-          {
-            "id": 4,
-            "name": "Abrir caderno2",
-            "active": false
-          },
-          {
-            "id": 5,
-            "name": "Fazer tarefa2",
-            "active": false
-          },
-          {
-            "id": 6,
-            "name": "Fechar caderno2",
-            "active": false
-          },
-        ]
-      },
-    ];
-  }
+	constructor(
+		private ListService: ListService,
+		private TaskService: TaskService,
+		private AuthenticationService: AuthenticationService
+	) { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+		this.AuthenticationService.onAuthStatusChange.subscribe((isAuth) => {
+			if(isAuth) {
+				this.loadLists();
+			}
+		});
+
+		this.ListService.onNewList.subscribe(() => {
+			this.loadLists();
+		});
+
+		this.TaskService.onNewTask.subscribe((id_list) => {
+			this.loadTasksByList(id_list);
+        });
+	};
+
+	loadLists() {
+		this.ListService.getAll().subscribe(lists => {
+			this.list = lists.items;
+		});
+	};
+
+	loadTasksByList(id_list) {
+		this.TaskService.getTasksByList(id_list).subscribe(tasks => {
+			this.updateTasksByList(id_list, tasks);
+		});
+	};
+
+	updateTasksByList(id_list, tasks) {
+		let index = this.list.findIndex(x => x.id === id_list);
+		this.list[index].tasks = tasks.items;
+	};
 
 }

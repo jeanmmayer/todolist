@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Task } from '../../_models/task.model';
+import { Task } from 'src/app/_models/task.model';
+import { TaskService } from 'src/app/_services/task.service';
 
 @Component({
 	selector: 'app-tasks',
@@ -8,15 +9,14 @@ import { Task } from '../../_models/task.model';
 })
 export class TasksComponent implements OnInit {
 
-	@Input() task: Task;
+	@Input() task: any;
 	completed_icon = 'check_box_outline_blank';
 
-	constructor() {
-	}
+	constructor() { }
 
 	ngOnInit(): void {
 		this.defineIcon();
-	}
+	};
 
 	toggleCheck() {
 		this.task.active = !this.task.active;

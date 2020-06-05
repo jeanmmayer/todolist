@@ -3,15 +3,19 @@
 		type="button"
 		class="btn dropdown-toggle"
 		data-toggle="dropdown"
-		[attr.data-target]="'dropdown' + id"
+		[attr.data-target]="'dropdown' + task.id"
 	>
 		Opções
     </button>
-    <div class="dropdown-menu" [attr.data-target]="'dropdown' + id">
-      	<a class="dropdown-item d-flex align-items-center text-primary" href="#">
+    <div class="dropdown-menu" [attr.data-target]="'dropdown' + task.id">
+		<a
+			class="dropdown-item d-flex align-items-center text-primary"
+			href="#"
+		>
 			<i class="material-icons md-dark">edit</i>
 			Editar
 		</a>
+
       	<a class="dropdown-item d-flex align-items-center text-danger" href="#">
 			<i class="material-icons md-dark ">delete_forever</i>
 			Excluir

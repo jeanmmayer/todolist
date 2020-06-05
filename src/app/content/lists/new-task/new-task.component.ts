@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TaskService } from "../../../_services";
+import { TaskService } from "src/app/_services";
 
 @Component({
 	selector: 'app-new-task',
@@ -16,12 +16,14 @@ export class NewTaskComponent implements OnInit {
 		private TaskService: TaskService
 	) {	}
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		this.TaskService.onNewTask.subscribe(() => {
+			this.taskName = "";
+		});
+	}
 
 	save() {
-		console.log("salva a tarefa");
-		this.taskName = "";
 		this.TaskService.insert(this.id_list, this.taskName);
-	}
+	};
 
 }

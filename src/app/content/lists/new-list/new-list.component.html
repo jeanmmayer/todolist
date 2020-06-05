@@ -1,6 +1,6 @@
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center flex-wrap">
 
-    <div class="flex-grow-1 pr-2">
+    <div class="flex-grow-1 pr-2 flex-wrap">
         <input
             type="text"
             class="form-control"
@@ -10,29 +10,28 @@
         />
     </div>
 
-    <div>
+    <div class="text-center m-auto">
         <button
             class="btn btn-primary d-flex align-items-center"
-            title="Criar lista"
+            title="Criar Lista"
             (click)="openField()"
             *ngIf="!showField"
         >
             <i class="material-icons md-dark text-light add-circle mr-1">add_circle</i>
-            Criar lista
+            Criar Lista
         </button>
         <button
             class="btn"
-            title="Criar lista"
+            title="Cancelar cadastro"
             (click)="closeField()"
-            [disabled]="!listName.length"
             *ngIf="showField"
         >
             Cancelar
         </button>
         <button
             class="btn btn-primary"
-            title="Criar lista"
-            (click)="openField()"
+            title="Criar Lista"
+            (click)="save()"
             [disabled]="!listName.length"
             *ngIf="showField"
         >

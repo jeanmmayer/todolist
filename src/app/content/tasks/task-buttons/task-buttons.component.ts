@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TaskButtons } from '../../../_models/task-buttons.model';
+import { Task } from 'src/app/_models';
 
 @Component({
 	selector: 'app-task-buttons',
@@ -8,7 +8,7 @@ import { TaskButtons } from '../../../_models/task-buttons.model';
 })
 export class TaskButtonsComponent implements OnInit {
 
-  	@Input() id: TaskButtons;
+  	@Input() task: Task;
 
   	constructor() { }
 

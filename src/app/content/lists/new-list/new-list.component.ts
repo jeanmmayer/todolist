@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ListService } from 'src/app/_services';
 
 @Component({
 	selector: 'app-new-list',
@@ -11,9 +12,18 @@ export class NewListComponent implements OnInit {
 
 	@Input() listName: string = "";
 
-	constructor() { }
+	constructor(
+		private ListService: ListService
+	) { }
 
 	ngOnInit(): void {
+		this.ListService.onNewList.subscribe(() => {
+			this.closeField();
+        });
+	}
+
+	save() {
+		this.ListService.insert(this.listName);
 	}
 
 	openField() {

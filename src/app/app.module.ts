@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { AuthInterceptor, ErrorInterceptor } from './_helpers';
 import { AuthInterceptor } from './_helpers';
 import { NewListComponent } from './content/lists/new-list/new-list.component';
+import { EditTaskComponent } from './content/tasks/edit-task/edit-task.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { NewListComponent } from './content/lists/new-list/new-list.component';
 		TaskButtonsComponent,
 		NewTaskComponent,
 		NewListComponent,
+		EditTaskComponent,
 	],
 	imports: [
 		BrowserModule,
