@@ -19,17 +19,17 @@ export class ListsComponent implements OnInit {
           {
             "id": 1,
             "name": "Abrir caderno",
-            "status": 1
+            "active": true
           },
           {
             "id": 2,
             "name": "Fazer tarefa",
-            "status": 0
+            "active": false
           },
           {
             "id": 3,
             "name": "Fechar caderno",
-            "status": 0
+            "active": false
           },
         ]
       },
@@ -40,17 +40,17 @@ export class ListsComponent implements OnInit {
           {
             "id": 4,
             "name": "Abrir caderno2",
-            "status": 1
+            "active": false
           },
           {
             "id": 5,
             "name": "Fazer tarefa2",
-            "status": 1
+            "active": false
           },
           {
             "id": 6,
             "name": "Fechar caderno2",
-            "status": 0
+            "active": false
           },
         ]
       },

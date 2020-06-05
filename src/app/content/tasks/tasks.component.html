@@ -15,14 +15,16 @@
         <button
             type="button"
             class="btn border-0"
-            [class.btn-outline-success]="task.status == 1"
-            >
-            <i class="material-icons md-dark">
+            [class.text-success]="task.active"
+            (click)="toggleCheck()"
+        >
+            <i class="material-icons">
                 {{ completed_icon }}
             </i>
         </button>
 
         {{ task.name }}
+
     </div>
 
     <app-task-buttons [id]="task.id"></app-task-buttons>

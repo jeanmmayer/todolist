@@ -1,0 +1,24 @@
+{
+    "/api/*": {
+        "target": "https://tasks-homolog.k8s-platform-dev-us-east-1.fluig.io/tasks/api-docs?group=v2",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/api": ""
+        },
+        "changeOrigin": true
+    },
+    "/auth": {
+        "target": "https://api-fluig.staging.totvs.app/accounts/oauth/token?grant_type=password&response_type=token&client_id=demo&username=jean.michael@desafiofluig.com&password=Jean@123",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/auth": ""
+        },
+        "headers": {
+            "Authentication": "Basic ZGVtbzpzU2R4T1lEQU0zRkJO",
+            "Content-Type":  "application/json"
+        },
+        "changeOrigin": true
+    }
+}

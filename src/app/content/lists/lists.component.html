@@ -1,13 +1,8 @@
-<h4 class="d-flex align-items-center">
-	<div class="flex-grow-1">
-		Listas de Tarefas
-	</div>
-	<div class="d-flex align-items-center pointer">
-		<button class="btn btn-primary" title="Criar lista">
-			<i class="material-icons md-dark text-light add-circle">add_circle list</i>
-		</button>
-	</div>
+<h4>
+	Listas de Tarefas
 </h4>
+
+<app-new-list></app-new-list>
 
 <div *ngFor="let l of list; let idx = index">
 	<a

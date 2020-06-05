@@ -1,0 +1,43 @@
+<div class="d-flex align-items-center">
+
+    <div class="flex-grow-1 pr-2">
+        <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="listName"
+            *ngIf="showField"
+            placeholder="Digite aqui o nome da lista..."
+        />
+    </div>
+
+    <div>
+        <button
+            class="btn btn-primary d-flex align-items-center"
+            title="Criar lista"
+            (click)="openField()"
+            *ngIf="!showField"
+        >
+            <i class="material-icons md-dark text-light add-circle mr-1">add_circle</i>
+            Criar lista
+        </button>
+        <button
+            class="btn"
+            title="Criar lista"
+            (click)="closeField()"
+            [disabled]="!listName.length"
+            *ngIf="showField"
+        >
+            Cancelar
+        </button>
+        <button
+            class="btn btn-primary"
+            title="Criar lista"
+            (click)="openField()"
+            [disabled]="!listName.length"
+            *ngIf="showField"
+        >
+            Salvar
+        </button>
+    </div>
+
+</div>

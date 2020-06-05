@@ -2,22 +2,32 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../_models/task.model';
 
 @Component({
-  selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+	selector: 'app-tasks',
+	templateUrl: './tasks.component.html',
+	styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
 
-  @Input() task: Task;
-  completed_icon = 'check_box_outline_blank';
+	@Input() task: Task;
+	completed_icon = 'check_box_outline_blank';
 
-  constructor() {
-  }
+	constructor() {
+	}
 
-  ngOnInit(): void {
-    if (this.task.status == 1) {
-      this.completed_icon = 'check_box';
-    }
-  }
+	ngOnInit(): void {
+		this.defineIcon();
+	}
 
+	toggleCheck() {
+		this.task.active = !this.task.active;
+		this.defineIcon();
+	}
+
+	defineIcon() {
+		if (this.task.active) {
+			this.completed_icon = 'check_box';
+		} else {
+			this.completed_icon = 'check_box_outline_blank';
+		}
+	}
 }

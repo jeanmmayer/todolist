@@ -20,7 +20,7 @@
         <div class="w-100">
             <input
                 type="text"
-                [(ngModel)]="taskText"
+                [(ngModel)]="taskName"
                 class="form-control w-100 border-0 bg-transparent"
                 placeholder="Digite aqui..."
             >
@@ -28,7 +28,8 @@
     </div>
     <button
         class="btn m-auto btn-primary"
-        [disabled]="!taskText.length"
+        [disabled]="!taskName.length"
+        (click)="save()"
     >
         Salvar Tarefa
     </button>

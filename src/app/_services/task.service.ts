@@ -7,11 +7,24 @@ import { environment } from '../../environments/environment';
 export class TaskService {
     constructor(private http: HttpClient) { }
 
-    getAll(id_list: number) {
+    insert(id_list: number, name: string) {
         let params = {
-            'id_list': id_list
+            'dto': name,
+            'listId': id_list
         };
 
-        // return this.http.get<any>(`${environment.apiUrl}/tasks`, params);
+        return this.http.post<any>(`api/lists/${id_list}/tasks`, params);
+    }
+
+    updateCheck(id_task: number, new_status: string) {
+
+    }
+
+    updateName() {
+
+    }
+
+    remove() {
+
     }
 }
