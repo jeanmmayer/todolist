@@ -11,8 +11,7 @@ import { TaskButtonsComponent } from './content/tasks/task-buttons/task-buttons.
 import { NewTaskComponent } from './content/lists/new-task/new-task.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { AuthInterceptor, ErrorInterceptor } from './_helpers';
-import { AuthInterceptor } from './_helpers';
+import { AuthInterceptor, ErrorInterceptor } from './_helpers';
 import { NewListComponent } from './content/lists/new-list/new-list.component';
 import { EditTaskComponent } from './content/tasks/edit-task/edit-task.component';
 
@@ -37,7 +36,7 @@ import { EditTaskComponent } from './content/tasks/edit-task/edit-task.component
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-		// { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 	],
 	bootstrap: [AppComponent]
 })
