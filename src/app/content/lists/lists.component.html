@@ -6,22 +6,33 @@
 
 <app-new-list></app-new-list>
 
-<div *ngFor="let l of list; let idx = index">
-	<a
-		class="text-dark btn pointer bg-white text-left p-4 shadow-sm d-flex mt-2 border"
-		data-toggle="collapse"
-		href="#collapse{{ idx }}"
-		role="button"
-		aria-expanded="true"
-	>
-		<i class="material-icons md-dark text-primary">list</i>
-		{{ l.name }}
-	</a>
+<div *ngIf="!loadingLists">
+	<div *ngFor="let l of list.items; let idx = index">
+		<a
+			class="text-dark btn pointer bg-white text-left p-4 shadow-sm d-flex mt-2 border"
+			data-toggle="collapse"
+			href="#collapse{{ idx }}"
+			role="button"
+			aria-expanded="true"
+		>
+			<i class="material-icons md-dark text-primary">list</i>
+			{{ l.name }}
+		</a>
 
-	<div class="collapse show shadow-sm" id="collapse{{ idx }}">
-		<ul class="list-group">
-			<app-tasks *ngFor="let t of l.tasks" [task]="t"></app-tasks>
-			<app-new-task [id_list]="l.id"></app-new-task>
-		</ul>
+		<div class="collapse shadow-sm" id="collapse{{ idx }}">
+			<ul class="list-group">
+				<app-tasks *ngFor="let t of l.tasks.items" [task]="t"></app-tasks>
+				<app-new-task [listId]="l.id"></app-new-task>
+			</ul>
+		</div>
 	</div>
+
+	<app-pagination
+		[currentPage]="page"
+		[hasNext]="list.hasNext"
+		(nextPage)="nextPage()"
+		(previousPage)="previousPage()"
+	></app-pagination>
 </div>
+
+<app-loading-container *ngIf="loadingLists"></app-loading-container>

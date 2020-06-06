@@ -10,13 +10,16 @@
     <div class="dropdown-menu" [attr.data-target]="'dropdown' + task.id">
 		<a
 			class="dropdown-item d-flex align-items-center text-primary"
-			href="#"
+			(click)="startEdit()"
 		>
 			<i class="material-icons md-dark">edit</i>
 			Editar
 		</a>
 
-      	<a class="dropdown-item d-flex align-items-center text-danger" href="#">
+		<a
+			class="dropdown-item d-flex align-items-center text-danger"
+			(click)="remove()"
+		>
 			<i class="material-icons md-dark ">delete_forever</i>
 			Excluir
 		</a>

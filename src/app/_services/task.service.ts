@@ -8,39 +8,53 @@ export class TaskService {
     constructor(private http: HttpClient) { }
 
     onNewTask: EventEmitter<any> = new EventEmitter<any>();
+    onDeleteTask: EventEmitter<any> = new EventEmitter<any>();
+    onUpdateTask: EventEmitter<any> = new EventEmitter<any>();
 
-    getTasksByList(id_list: string) {
-        return this.http.get<any>(`/api/lists/${id_list}/tasks`);
+    getTasksByList(listId: string) {
+        return this.http.get<any>(`/api/lists/${listId}/tasks?expand=status`);
     };
 
-    insert(id_list: number, name: string) {
+    insert(listId: string, name: string) {
         let params = {
             "name": name
         };
 
-        return this.http.post<any>(`/api/lists/${id_list}/tasks`, params).subscribe(
+        return this.http.post<any>(`/api/lists/${listId}/tasks`, params).subscribe(
 			response => {
-                this.onNewTask.emit(id_list);
+                this.onNewTask.emit(listId);
             },
 			err => {
-                console.log(err);
+                // console.log(err);
             }
 		);
     };
 
-    updateCheck(id_list: number, id_status: number, new_status: string) {
+    close(listId: string, taskId: string) {
         let params = {
-            'statusType': new_status
+            'id': taskId,
+            'listId': listId
         };
 
-        return this.http.patch<any>(`/api/lists/${id_list}/task-status/${id_status}`, params);
+        return this.http.post<any>(`/api/lists/${listId}/tasks/${taskId}/close`, params).subscribe(() => {
+            this.onUpdateTask.emit(taskId);
+        });
     };
 
-    updateName() {
+    open(listId: string, taskId: string) {
+        let params = {
+            'id': taskId,
+            'listId': listId
+        };
 
+        return this.http.post<any>(`/api/lists/${listId}/tasks/${taskId}/open`, params).subscribe(() => {
+            this.onUpdateTask.emit(taskId);
+        });
     };
 
-    remove(id_list: number, id_task: number) {
-        return this.http.get<any>(`/api/lists/${id_list}/tasks/${id_task}`);
+    remove(listId: string, taskId: string) {
+        return this.http.delete<any>(`/api/lists/${listId}/tasks/${taskId}`).subscribe(() => {
+            this.onDeleteTask.emit(listId);
+        });
     };
 }

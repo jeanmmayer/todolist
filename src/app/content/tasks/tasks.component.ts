@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Task } from 'src/app/_models/task.model';
 import { TaskService } from 'src/app/_services/task.service';
 
 @Component({
@@ -10,24 +9,31 @@ import { TaskService } from 'src/app/_services/task.service';
 export class TasksComponent implements OnInit {
 
 	@Input() task: any;
-	completed_icon = 'check_box_outline_blank';
 
-	constructor() { }
+	constructor(
+		private TaskService: TaskService
+	) { }
 
 	ngOnInit(): void {
-		this.defineIcon();
+		this.TaskService.onUpdateTask.subscribe((taskId) => {
+			console.log(taskId);
+		});
 	};
 
 	toggleCheck() {
-		this.task.active = !this.task.active;
-		this.defineIcon();
-	}
-
-	defineIcon() {
-		if (this.task.active) {
-			this.completed_icon = 'check_box';
+		if(this.task.status.name == "Fechado") {
+			this.open();
 		} else {
-			this.completed_icon = 'check_box_outline_blank';
+			this.close();
 		}
-	}
+	};
+
+	open() {
+		this.TaskService.open(this.task.listId, this.task.id);
+	};
+
+	close() {
+		this.TaskService.close(this.task.listId, this.task.id);
+	};
+
 }

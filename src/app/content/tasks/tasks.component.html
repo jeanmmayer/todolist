@@ -1,4 +1,3 @@
-
 <li
     class="
         list-group-item
@@ -15,12 +14,10 @@
         <button
             type="button"
             class="btn border-0"
-            [class.text-success]="task.active"
             (click)="toggleCheck()"
         >
-            <i class="material-icons">
-                {{ completed_icon }}
-            </i>
+            <i class="material-icons text-success" *ngIf="task.status.name == 'Fechado'">check_box</i>
+            <i class="material-icons" *ngIf="task.status.name == 'Aberto'">check_box_outline_blank</i>
         </button>
 
         {{ task.name }}

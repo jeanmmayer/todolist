@@ -8,7 +8,8 @@ import { ListService } from 'src/app/_services';
 })
 export class NewListComponent implements OnInit {
 
-	showField = false;
+	showField: boolean = false;
+	loadingBtn: boolean = false;
 
 	@Input() listName: string = "";
 
@@ -23,6 +24,7 @@ export class NewListComponent implements OnInit {
 	}
 
 	save() {
+		this.loadingBtn = true;
 		this.ListService.insert(this.listName);
 	}
 
@@ -33,6 +35,7 @@ export class NewListComponent implements OnInit {
 	closeField() {
 		this.showField = false;
 		this.listName = "";
+		this.loadingBtn = false;
 	}
 
 }

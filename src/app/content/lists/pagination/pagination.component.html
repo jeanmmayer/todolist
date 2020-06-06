@@ -1,0 +1,29 @@
+<nav>
+    <ul class="pagination justify-content-center m-4">
+        <li class="page-item">
+            <a
+                class="page-link btn btn-link"
+                href="#"
+                (click)="previousPage.emit()"
+
+            >
+                Anterior
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link btn btn-link">
+                {{ currentPage }}
+            </a>
+        </li>
+        <li class="page-item">
+            <a
+                class="page-link btn btn-link"
+                href="#"
+                (click)="nextPage.emit()"
+                [class.disabled]="!hasNext"
+            >
+                Seguinte
+            </a>
+        </li>
+    </ul>
+</nav>

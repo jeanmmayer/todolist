@@ -32,10 +32,13 @@
             class="btn btn-primary"
             title="Criar Lista"
             (click)="save()"
-            [disabled]="!listName.length"
+            [disabled]="!listName.length || loadingBtn"
             *ngIf="showField"
         >
-            Salvar
+            <div *ngIf="loadingBtn" class="spinner-border" role="status"></div>
+            <span *ngIf="!loadingBtn">
+                Salvar
+            </span>
         </button>
     </div>
 

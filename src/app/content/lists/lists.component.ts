@@ -11,7 +11,9 @@ import { AuthenticationService } from 'src/app/_services';
 })
 export class ListsComponent {
 
-	list: List[];
+	list: any;
+	page: number = 1;
+	loadingLists = true;
 
 	constructor(
 		private ListService: ListService,
@@ -30,26 +32,48 @@ export class ListsComponent {
 			this.loadLists();
 		});
 
-		this.TaskService.onNewTask.subscribe((id_list) => {
-			this.loadTasksByList(id_list);
+		this.ListService.onListReady.subscribe((listWithTasks) => {
+			this.list = listWithTasks;
+			this.loadingLists = false;
+		});
+
+		this.TaskService.onDeleteTask.subscribe((listId) => {
+			this.loadTasksByList(listId);
+		});
+
+		this.TaskService.onNewTask.subscribe((listId) => {
+			this.loadTasksByList(listId);
         });
 	};
 
 	loadLists() {
-		this.ListService.getAll().subscribe(lists => {
-			this.list = lists.items;
+		this.loadingLists = true;
+		this.ListService.getLists(this.page);
+	};
+
+	loadTasksByList(listId) {
+		this.TaskService.getTasksByList(listId).subscribe(tasks => {
+			this.updateTasksByList(listId, tasks);
 		});
 	};
 
-	loadTasksByList(id_list) {
-		this.TaskService.getTasksByList(id_list).subscribe(tasks => {
-			this.updateTasksByList(id_list, tasks);
-		});
+	updateTasksByList(listId, tasks) {
+		let index = this.list.items.findIndex(x => x.id === listId);
+		this.list.items[index].tasks = tasks.items;
 	};
 
-	updateTasksByList(id_list, tasks) {
-		let index = this.list.findIndex(x => x.id === id_list);
-		this.list[index].tasks = tasks.items;
+	nextPage() {
+		if(this.list.hasNext) {
+			this.page += 1;
+			this.loadLists();
+		}
+	};
+
+	previousPage() {
+		if(this.page > 1) {
+			this.page -= 1;
+			this.loadLists();
+		}
 	};
 
 }

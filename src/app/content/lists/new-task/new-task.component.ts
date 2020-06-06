@@ -8,9 +8,10 @@ import { TaskService } from "src/app/_services";
 })
 export class NewTaskComponent implements OnInit {
 
-	@Input() id_list: number;
+	@Input() listId: string;
 
 	taskName: string = "";
+	loadingBtn: boolean = false;
 
 	constructor(
 		private TaskService: TaskService
@@ -19,11 +20,13 @@ export class NewTaskComponent implements OnInit {
 	ngOnInit(): void {
 		this.TaskService.onNewTask.subscribe(() => {
 			this.taskName = "";
+			this.loadingBtn = false;
 		});
 	}
 
 	save() {
-		this.TaskService.insert(this.id_list, this.taskName);
+		this.loadingBtn = true;
+		this.TaskService.insert(this.listId, this.taskName);
 	};
 
 }
