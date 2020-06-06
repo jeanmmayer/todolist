@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../_services';
 
 @Component({
 	selector: 'app-content',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-	constructor() { }
+	constructor(
+		private AuthenticationService: AuthenticationService
+	) { }
+
+	authFailed = false;
 
 	ngOnInit(): void {
+		this.AuthenticationService.onAuthStatusChange.subscribe(response => {
+			this.authFailed = true;
+		});
 	}
 
 }

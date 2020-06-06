@@ -1,3 +1,11 @@
 <main class="container">
-	<app-lists></app-lists>
+	<app-lists *ngIf="authFailed"></app-lists>
+	<div *ngIf="!authFailed" class="text-center alert alert-danger mt-4">
+		<strong>Autenticação falhou</strong>
+		<div>
+			Houve algum erro ao gerar o access token.
+		</div>
+		<hr>
+		<a href="." class="btn btn-primary">Tentar Novamente</a>
+	</div>
 </main>
