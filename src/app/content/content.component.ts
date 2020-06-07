@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../_services';
+// import { ErrorInterceptor } from 'src/app/_helpers';
 
 @Component({
 	selector: 'app-content',
@@ -9,15 +9,15 @@ import { AuthenticationService } from '../_services';
 export class ContentComponent implements OnInit {
 
 	constructor(
-		private AuthenticationService: AuthenticationService
+		// private ErrorInterceptor: ErrorInterceptor
 	) { }
 
 	authFailed = false;
 
 	ngOnInit(): void {
-		this.AuthenticationService.onAuthStatusChange.subscribe(response => {
-			this.authFailed = true;
-		});
+		// this.ErrorInterceptor.onAuthFail.subscribe(response => {
+		// 	this.authFailed = true;
+		// });
 	}
 
 }

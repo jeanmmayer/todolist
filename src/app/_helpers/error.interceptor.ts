@@ -9,7 +9,7 @@ import { AuthenticationService } from 'src/app/_services';
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) { }
 
-    onAuthFail: EventEmitter<any> = new EventEmitter<any>();
+    // onAuthFail: EventEmitter<any> = new EventEmitter<any>();
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const retryRequest = request.clone();
@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         return next.handle(retryRequest);
                     },
                     error => {
-                        this.onAuthFail.emit();
+                        // this.onAuthFail.emit();
                     }
                 );
             }
